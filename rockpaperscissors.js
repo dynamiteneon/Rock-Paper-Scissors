@@ -114,8 +114,21 @@ for (let i=0; i<5;i++){
     }
 }
 
-console.log(Plyr);
-console.log(Cmptr);
+let PlayerScore = `Player Score: ${Plyr}`;
+let ComputerScore = `Computer Score: ${Cmptr}`;
+
+if(Plyr>Cmptr){
+    console.log("Player wins!");
+}
+else if(Cmptr>Plyr){
+    console.log("Computer wins!");
+}
+else{
+    console.log("Tie Game");
+}
+
+console.log(PlayerScore);
+console.log(ComputerScore);
 
 
 
