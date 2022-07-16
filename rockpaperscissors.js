@@ -1,3 +1,15 @@
+const rockbtn = document.querySelector('#rock');
+const paperbtn = document.querySelector('#paper');
+const scissorbtn = document.querySelector('#scissors');
+
+const footer = document.querySelector('#footer');
+const resultdiv = document.createElement('div');
+
+let PlayerScore = 0;
+let ComputerScore = 0;
+let ResultStr;
+
+
 function getRandomInt(max){
     return Math.floor(Math.random() * max);
 }
@@ -22,17 +34,8 @@ function getComputerChoice(){
     return Computer;
 }
 
-function getPlayerChoice (){
-    let PlayerChoice = prompt("Rock, Paper, or Scissors?");
-    PlayerChoice = PlayerChoice.toLowerCase();
-    return PlayerChoice;
-}
-
 function RockPaperScissors (ComputerChoice,PlayerChoice){
 
-    console.log(ComputerChoice);
-    console.log(PlayerChoice);
-    
     let Result;
 
     if(ComputerChoice=="rock"){
@@ -93,42 +96,31 @@ function RockPaperScissors (ComputerChoice,PlayerChoice){
 
     }
 
-    return Result;
-}
-
-let Plyr = 0;
-let Cmptr = 0;
-
-for (let i=0; i<5;i++){
-    
-    let Round = RockPaperScissors(getComputerChoice(),getPlayerChoice());
-
-    if(Round=="computer"){
-        Cmptr++;
+    if(Result=="player"){
+        PlayerScore++;
     }
-    else if(Round=="player"){
-        Plyr++;
+    else if(Result=="computer"){
+        ComputerScore++;
     }
-    else if(Round=="tie"){
+    else{}
 
-    }
+    resultdiv.classList.add('result');
+    ResultStr = `Score - Computer: ${ComputerScore} Player: ${PlayerScore}`
+    resultdiv.textContent = ResultStr;
+    footer.appendChild(resultdiv);
+
 }
 
-let PlayerScore = `Player Score: ${Plyr}`;
-let ComputerScore = `Computer Score: ${Cmptr}`;
+rockbtn.addEventListener('click',function(){
+    RockPaperScissors(getComputerChoice(),"rock");
+});
 
-if(Plyr>Cmptr){
-    console.log("Player wins!");
-}
-else if(Cmptr>Plyr){
-    console.log("Computer wins!");
-}
-else{
-    console.log("Tie Game");
-}
+paperbtn.addEventListener('click',function(){
+    RockPaperScissors(getComputerChoice(),"paper");
+});
 
-console.log(PlayerScore);
-console.log(ComputerScore);
-
+scissorbtn.addEventListener('click',function(){
+    RockPaperScissors(getComputerChoice(),"scissors");
+});
 
 
