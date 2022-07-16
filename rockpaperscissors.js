@@ -4,10 +4,12 @@ const scissorbtn = document.querySelector('#scissors');
 
 const footer = document.querySelector('#footer');
 const resultdiv = document.createElement('div');
+const winnerdiv = document.createElement('div');
 
 let PlayerScore = 0;
 let ComputerScore = 0;
 let ResultStr;
+let WinnerStr;
 
 
 function getRandomInt(max){
@@ -98,16 +100,58 @@ function RockPaperScissors (ComputerChoice,PlayerChoice){
 
     if(Result=="player"){
         PlayerScore++;
+        WinnerStr = `Player chose ${PlayerChoice}, Computer chose ${ComputerChoice}.  Player wins!`
     }
     else if(Result=="computer"){
         ComputerScore++;
+        WinnerStr = `Computer chose ${ComputerChoice}, Player chose ${PlayerChoice}.  Computer wins!`
     }
-    else{}
+    else{
+        WinnerStr = "It's a tie."
+    }
+
+    
+    
+    winnerdiv.classList.add('result');
+    winnerdiv.textContent = WinnerStr;
+    footer.appendChild(winnerdiv);
 
     resultdiv.classList.add('result');
     ResultStr = `Score - Computer: ${ComputerScore} Player: ${PlayerScore}`
     resultdiv.textContent = ResultStr;
     footer.appendChild(resultdiv);
+
+
+    if(PlayerScore==5){
+        alert("Player is first to 5!");
+        PlayerScore = 0;
+        ComputerScore = 0;
+
+        winnerdiv.classList.add('result');
+        winnerdiv.textContent = WinnerStr;
+        footer.appendChild(winnerdiv);
+    
+        resultdiv.classList.add('result');
+        ResultStr = `Score - Computer: ${ComputerScore} Player: ${PlayerScore}`
+        resultdiv.textContent = ResultStr;
+        footer.appendChild(resultdiv);
+
+    }
+    
+    if(ComputerScore==5){
+        alert("Computer is first to 5!");
+        PlayerScore = 0;
+        ComputerScore = 0;
+
+        winnerdiv.classList.add('result');
+        winnerdiv.textContent = WinnerStr;
+        footer.appendChild(winnerdiv);
+    
+        resultdiv.classList.add('result');
+        ResultStr = `Score - Computer: ${ComputerScore} Player: ${PlayerScore}`
+        resultdiv.textContent = ResultStr;
+        footer.appendChild(resultdiv);
+    }
 
 }
 
